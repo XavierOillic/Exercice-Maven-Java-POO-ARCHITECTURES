@@ -17,7 +17,7 @@ import Architectures_Couches.repository.impl.UserRepositoryJson;
 
 public class TestUserRepository {
 
-	private UserRepository users = new Architectures_Couches.repository.impl.UserRepositoryJson("data/json/users.json");
+	private UserRepository users = new UserRepositoryJson("data/json/users.json");
 
 	@BeforeEach
 	void beforeEachTest() throws IOException {
@@ -26,24 +26,24 @@ public class TestUserRepository {
 
 	@Test
 	void testCreateAndRetrieve() throws IOException {
-		users.create(new Architectures_Couches.model.User("Stef", "p@$$w0rd", "stef@secudev.net", true));
-		users.create(new Architectures_Couches.model.User("Mina", "p@$$w0rd", "mina@secudev.net", true));
-		List<Architectures_Couches.model.User> testList = users.retrieve();
+		users.create(new User("Stef", "p@$$w0rd", "stef@secudev.net", true));
+		users.create(new User("Mina", "p@$$w0rd", "mina@secudev.net", true));
+		List<User> testList = users.retrieve();
 		assertEquals(2, testList.size());
-	}
+	}// TEST LA LONGUEUR DU TABLEAU
 
 	@Test
 	void testUpdate() throws Exception {
-		Architectures_Couches.model.User stef = users.create(new Architectures_Couches.model.User("Stef", "p@$$w0rd", "stef@secudev.net", true));
+		User stef = users.create(new User("Stef", "p@$$w0rd", "stef@secudev.net", true));
 		assertEquals("stef@secudev.net", users.getByLogin("Stef").getEmail());
 		stef.setEmail("stef@gmail.com");
 		users.update(stef, stef.getId());
 		assertEquals("stef@gmail.com", users.getByLogin("Stef").getEmail());
-	}
+	} // TEST QUE LE UPDATE FONCTIONNE CORRECTEMENT.
 
 	@Test
 	void testDelete() throws IOException {
-		Architectures_Couches.model.User stef = users.create(new Architectures_Couches.model.User("Stef", "p@$$w0rd", "stef@secudev.net", true));
+		User stef = users.create(new User("Stef", "p@$$w0rd", "stef@secudev.net", true));
 		assertEquals(1, users.count());
 
 		try {
@@ -56,18 +56,19 @@ public class TestUserRepository {
 
 	@Test
 	void testFindByLogin() throws IOException {
-		users.create(new Architectures_Couches.model.User("Stef", "p@$$w0rd", "stef@secudev.net", true));
-		users.create(new Architectures_Couches.model.User("Mina", "p@$$w0rd", "mina@secudev.net", true));
+		users.create(new User("Stef", "p@$$w0rd", "stef@secudev.net", true));
+		users.create(new User("Mina", "p@$$w0rd", "mina@secudev.net", true));
 
-		assertNotNull(users.getByLogin("Stef"));
+		assertNotNull(users.getByLogin("Stef"));// TEST QU4IL Y A BIEN UN IDENTIFIANT SOUS CE LOGIN
 		assertNotNull(users.getByLogin("Mina"));
-		assertNull(users.getByLogin("Steph"));
+		
+		assertNull(users.getByLogin("Steph"));// TEST QU4IL N'Y A PAS D'IDENTIFIANT SOUS CE LOGIN
 		assertNull(users.getByLogin("mina"));
 	}
 
 	@Test
 	void testFindById() throws IOException {
-		String id = users.create(new Architectures_Couches.model.User("Stef", "p@$$w0rd", "stef@secudev.net", true)).getId();
+		String id = users.create(new User("Stef", "p@$$w0rd", "stef@secudev.net", true)).getId();
 		assertEquals("Stef", users.getById(id).getLogin());
 	}
 	

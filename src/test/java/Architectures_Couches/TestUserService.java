@@ -28,11 +28,11 @@ public class TestUserService {
 		
 		// 10 fake users creation
 		for (int i = 1; i < 10; i++) {
-			users.create(new Architectures_Couches.model.User("user" + i, "passworduser" + i, "user" + i + "@gmail.com", true));
+			users.create(new User("user" + i, "passworduser" + i, "user" + i + "@gmail.com", true));
 		}
 		
 		// Retrieve first fake user named user1
-		Architectures_Couches.model.User user1 = users.getByLogin("user1");
+		User user1 = users.getByLogin("user1");
 
 		//calling service method
 		userService.changeMyPassword(user1.getId(), user1.getPassword(), "newpassworduser1");
@@ -44,9 +44,7 @@ public class TestUserService {
 	
 	@Test
 	void testChangeEmail() throws Exception {
-		Architectures_Couches.model.User userXavier = users.create(new Architectures_Couches.model.User("xav", "1234", "xav@gmail.com", true));
-		
-		//Architectures_Couches.model.User userXav = users.getByLogin("xav");
+		User userXavier = users.create(new User("xav", "1234", "xav@gmail.com", true));
 		
 		userService.changeMyEmail(userXavier.getId(), "xavier@gmail.com");
 		
@@ -55,7 +53,7 @@ public class TestUserService {
 	
 	@Test
 	void testChangeEmailBis() throws Exception {
-		Architectures_Couches.model.User userZazou = users.create(new Architectures_Couches.model.User("Zazou", "5678", "zaz@gmail.com", true));
+		User userZazou = users.create(new User("Zazou", "5678", "zaz@gmail.com", true));
 		
 		userService.changeMyEmailBis(userZazou.getId(), "zazou@gmail.com");
 		

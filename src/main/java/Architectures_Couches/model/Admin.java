@@ -14,7 +14,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Admin extends BaseEntity implements CrudRepository<BaseEntity> {	
+public class Admin extends BaseEntity {	
 	@NonNull
 	private String login;
 	@NonNull
