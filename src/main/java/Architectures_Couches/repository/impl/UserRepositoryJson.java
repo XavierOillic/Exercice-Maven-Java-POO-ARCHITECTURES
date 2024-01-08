@@ -10,7 +10,7 @@ public class UserRepositoryJson extends GenericRepository<User> implements UserR
 		super(jsonFilePath);
 	}
 
-	public User getByLogin(String login) {
+	public User getByLogin(String login) { // DEFINITION DE LA METHODE GETBYLOGIN
 		
 		/*
 		 * A l'ancienne

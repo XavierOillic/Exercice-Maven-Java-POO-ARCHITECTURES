@@ -15,3 +15,4 @@ public abstract class BaseEntity  {
 }
 
 // UUID => Immutable Universaly Unique Identifier.
+// Création d'un ID ALEATOIRE pour retrouver un user ou un product

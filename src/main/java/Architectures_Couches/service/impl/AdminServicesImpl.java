@@ -6,17 +6,22 @@ import Architectures_Couches.model.User;
 import Architectures_Couches.repository.UserRepository;
 import Architectures_Couches.service.AdminService;
 import Architectures_Couches.utils.persistence.CrudRepository;
+import Architectures_Couches.utils.security.PasswordTools;
 
 
 
 public class AdminServicesImpl implements AdminService {
 
 	private UserRepository users;
+	private String RandomPassword = PasswordTools.generateRandomPassword();
 
 	public AdminServicesImpl(UserRepository users) {
 		this.users = users;
 		
 	}
+	public String getRandomPassword() { return RandomPassword;}
+	public void setRandomPassword(String randomPassword) {RandomPassword = randomPassword;}
+	
 	
 	@Override
 	public List<User> findAllUsers() {
@@ -24,7 +29,7 @@ public class AdminServicesImpl implements AdminService {
 	    for (User framboise : allUsers) { // j'itère dans le tableau grâce à FRAMBOISE
 	    	return (List<User>) framboise;
 	    } 
-	    System.out.println(allUsers+"  ===> Your password has been reseted !");
+	    System.out.println(allUsers);
 	return allUsers;
 	}
 	
@@ -33,10 +38,11 @@ public class AdminServicesImpl implements AdminService {
 		User userAdmin = users.getById(userId);
 		
 			userAdmin.getPassword(); // JE RECUPERE LE PASSWORD.
-			userAdmin.setPassword("newPass"); // JE MODIFIE LE PASSWORD
+			userAdmin.setPassword(RandomPassword); // JE MODIFIE LE PASSWORD
 			users.update(userAdmin, userId); // J'ENREGISTRE DANS LE REPO AVEC USERS.
 			
 			System.out.println(userAdmin);
+			System.out.println("===> New Password aléatoire : "+RandomPassword);
 			
 		}
 	
@@ -45,11 +51,11 @@ public class AdminServicesImpl implements AdminService {
 		User userAdmin = users.getById(userId);
 		
 		if (userAdmin.getPassword() == oldPass) {
-			userAdmin.setPassword(newPass);
-			users.update(userAdmin, newPass);
+			userAdmin.setPassword(RandomPassword);
+			users.update(userAdmin, RandomPassword);
 		} else 
 			throw new Exception ("Your password has been reseted !");
-		System.out.println("  ===> Méthode resetAndSendNewPasswordBis : Your password has been reseted !");
+		System.out.println("  ===> Méthode resetAndSendNewPasswordBis : "+RandomPassword+ "Your password has been reseted !");
 			System.out.println(userAdmin);
 	}
 	
@@ -77,5 +83,7 @@ public class AdminServicesImpl implements AdminService {
 				throw new Exception("Your account has been enabled.");	
 				System.out.println("  ===> Méthode ENABLE : Your account has been enabled. ");
 	}
+
+	
 
 }

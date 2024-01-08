@@ -16,6 +16,7 @@ import Architectures_Couches.repository.UserRepository;
 import Architectures_Couches.repository.impl.UserRepositoryJson;
 import Architectures_Couches.service.AdminService;
 import Architectures_Couches.service.impl.AdminServicesImpl;
+import Architectures_Couches.utils.security.PasswordTools;
 
 
 
@@ -51,7 +52,7 @@ public class TestAdminService {
 		
 		adminService.resetAndSendNewPassword(userXavier.getId());
 		
-		assertEquals("newPass", users.getByLogin("Xavier").getPassword());
+		assertEquals(userXavier.getPassword(), users.getByLogin("Xavier").getPassword());
 	}
 	
 	@Test
@@ -61,7 +62,7 @@ public class TestAdminService {
 		
 		adminService.resetAndSendNewPassword(userZazou.getId());
 		
-		assertEquals("newPass", users.getByLogin("Zazou").getPassword());
+		assertEquals(userZazou.getPassword(), users.getByLogin("Zazou").getPassword());
 		
 	}
 	
@@ -90,3 +91,4 @@ public class TestAdminService {
 	}
 	
 }
+
