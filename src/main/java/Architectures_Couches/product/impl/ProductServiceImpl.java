@@ -9,7 +9,6 @@ import Architectures_Couches.product.ProductService;
 import Architectures_Couches.repository.ProductRepository;
 import Architectures_Couches.utils.randomPriceAndSale.PriceTools;
 import Architectures_Couches.utils.randomPriceAndSale.SaleTools;
-import Architectures_Couches.utils.security.IdTools;
 
 public class ProductServiceImpl implements ProductService {
 	
