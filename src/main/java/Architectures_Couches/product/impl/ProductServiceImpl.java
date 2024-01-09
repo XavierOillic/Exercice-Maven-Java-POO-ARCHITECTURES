@@ -14,7 +14,6 @@ import Architectures_Couches.utils.security.IdTools;
 public class ProductServiceImpl implements ProductService {
 	
 	private ProductRepository products;
-	//private String RandomId = IdTools.generateIdPassword();
 	private int rdmPrice = PriceTools.generateRdmPrice();
 	private int rdmSale = SaleTools.generateRdmSale();
 	private String searchName;
@@ -96,8 +95,7 @@ public class ProductServiceImpl implements ProductService {
 				products.update(collectors, productId);
 			}
 		} else
-			throw new Exception ("We will stop this reference.");
-		
+			throw new Exception ("We will stop this reference.");	
 	}
 
 }
