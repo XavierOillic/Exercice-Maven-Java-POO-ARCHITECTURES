@@ -2,6 +2,8 @@ package Architectures_Couches;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// SORTES DE METHODES LOCALES EXECUTABLES PAR LE USER SUR ET UNIQUEMENT SUR SON PROPRE COMPTE.
+
 import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeEach;

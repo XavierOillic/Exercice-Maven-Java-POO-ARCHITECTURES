@@ -19,15 +19,10 @@ public class Product extends BaseEntity {
 	@NonNull
 	private String name;
 	
-	@NonNull
-	private String genre;
-	
 	private int price;
 	
 	private int quantity;
 	
 	private Boolean inStock;
-	
-	private int sale;
 
 }

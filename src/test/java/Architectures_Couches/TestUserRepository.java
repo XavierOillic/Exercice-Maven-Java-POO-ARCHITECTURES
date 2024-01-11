@@ -72,4 +72,5 @@ public class TestUserRepository {
 		assertEquals("Stef", users.getById(id).getLogin());
 	}
 	
+	
 }
