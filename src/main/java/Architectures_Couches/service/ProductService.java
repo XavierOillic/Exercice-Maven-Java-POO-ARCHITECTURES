@@ -8,11 +8,11 @@ public interface ProductService {
 	
 	List <Product> findAllProducts();
 	
-	void deleteProduct (String id) throws Exception;
-	
-	void findOne (String id) throws Exception;
+	void modifyQuantity (String id) throws Exception ;
 	
 	void checkStockAndAdd (String id) throws Exception;
+	
+	void checkStockAndAddBis (String id) throws Exception;
 	
 	/*void checKSale (String productId) throws Exception;*/
 

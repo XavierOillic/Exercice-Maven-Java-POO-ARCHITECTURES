@@ -7,14 +7,11 @@ import java.util.Random;
 import Architectures_Couches.model.Product;
 import Architectures_Couches.repository.ProductRepository;
 import Architectures_Couches.service.ProductService;
-import Architectures_Couches.utils.random.randomize;
-
 
 
 public class ProductServiceImpl implements ProductService {
 	
 	private ProductRepository products;
-	private String searchName;
 	
 	public ProductServiceImpl (ProductRepository products) {
 		this.products = products;
@@ -32,10 +29,11 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return allBooks;
 	}
-	
+			
+			
 	@Override
 	public void checkStockAndAdd(String productId) throws Exception {
-		int newQuantity = 100;
+		//int newQuantity = 0;
 		
 		int quantityInStock = rdm.nextInt(1, 10);
 		
@@ -45,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 		if (illustratedBook.getInStock() == true) {
 			if (illustratedBook.getQuantity() <= 5) {
 			
-				for (int a = 0; a <= 5; a++) {
+				for (int a = 0; a <= 3; a++) {
 					int realStock = rdm.nextInt(1, 10);
 				
 						illustratedBook.getQuantity();
@@ -55,13 +53,13 @@ public class ProductServiceImpl implements ProductService {
 				}
 			
 			illustratedBook.getQuantity();
-			illustratedBook.setQuantity(newQuantity);
+			illustratedBook.setQuantity(50);
 			products.update(illustratedBook, productId);
 			
 				} else if (illustratedBook.getInStock() == false) {
 				
 						illustratedBook.getQuantity();
-						illustratedBook.setQuantity(newQuantity);
+						illustratedBook.setQuantity(50);
 			
 						products.update(illustratedBook, productId);
 						
@@ -75,29 +73,46 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public void deleteProduct(String productId) throws Exception {
-		Product comics = products.getById(productId);
+	public void checkStockAndAddBis(String productId) throws Exception {
 		
-		products.getById(productId);
-		products.delete(productId);
-		products.update(comics, productId);
+		Product illustratedBook = products.getById(productId);
+		//products.getById(productId);
 		
+		if (illustratedBook.getInStock() == true) {
+			if (illustratedBook.getQuantity() <= 2) {
+				
+				illustratedBook.setQuantity(50);
+				
+				products.update(illustratedBook, productId);
+				
+					} else if (illustratedBook.getInStock() == false) {
+			
+						illustratedBook.getQuantity();
+						illustratedBook.setQuantity(50);
+
+						products.update(illustratedBook, productId);
+			
+						System.out.println(illustratedBook);
+					}
+			}
+			
 	}
+	
 
 	@Override
-	public void findOne(String productId) throws Exception {
-		String searchName = "";
-		Product bd = products.getById(productId);
+	public void modifyQuantity (String productId) throws Exception {
 		
-		products.getById(productId);
-		if (bd.getQuantity() >= 1) {
-			if(bd.getName() == searchName) {
-				bd.getInStock();
-			} else
-				throw new Exception("We haven't this One.");
-		}
-		
-	}
-
-
-}
+		ProductServiceImpl productServiceImpl = new ProductServiceImpl(products);
+		//Product gaston = products.create(new Product("Gaston", 12, realQuantity, true));
+		Product gaston = products.getById(productId);
+	
+					gaston.getQuantity();
+					gaston.setQuantity(gaston.getQuantity() - 20) ;
+					products.update(gaston, productId);
+					
+					System.out.println(gaston);	
+			} 
+	
+	
+	
+}// FIN DE CLASSE SERVICEPRODUCTIMPL.

@@ -42,16 +42,44 @@ public class TestProductService {
 	@Test
 	void testCheckStockAndAdd() throws Exception {
 		
-		Product lanfeust = products.create(new Product("Tome 1", 15, 1, true));
-		
-		
 		ProductServiceImpl productServiceImpl = new ProductServiceImpl(products);
+		
+		Product lanfeust = products.create(new Product("lanfeust", 15, 1, true));
 		
 		productServiceImpl.checkStockAndAdd(lanfeust.getId());
 		
-		assertEquals(10, products.getById("lanfeust").getQuantity());
+		assertEquals(50, products.getByName("lanfeust").getQuantity());
 	
 	}
+	
+	@Test
+	void testCheckStockAndAddBis () throws Exception {
+		
+		ProductServiceImpl productServiceImpl = new ProductServiceImpl(products);
+		
+		Product lanfeust = products.create(new Product("lanfeust", 15, 1, true));
+		
+		productServiceImpl.checkStockAndAddBis(lanfeust.getId());
+		
+		assertEquals(50, products.getByName("lanfeust").getQuantity());
+		
+	
+	}
+	@Test
+	void modifyQuantity () throws Exception {
+		
+		ProductServiceImpl productServiceImpl = new ProductServiceImpl(products);
+		
+		int realQuantity = rdm.nextInt(50, 80);
+		int finalQuantity = realQuantity - 20;
+		
+		Product rome = products.create(new Product("rome", 16, realQuantity, true));
+		
+		productServiceImpl.modifyQuantity(rome.getId());
+		
+		assertEquals(finalQuantity, products.getByName("rome").getQuantity());
+	}
+	
 	
 
 }
